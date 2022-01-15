@@ -6,6 +6,9 @@
         <div class="container-fluid add-form-list">
             <div class="row">
                 <div class="col-sm-12">
+                    @include('backend.layouts.notification')
+                </div>
+                <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title">
@@ -13,15 +16,16 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="page-list-category.html" data-toggle="validator" novalidate="true">
+                            <form action="{{ route('banner.store') }}" method="POST" data-toggle="validator"
+                                novalidate="true">
+                                @csrf
                                 <div class="row">
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Tên Banner *</label>
-                                            <input type="text" class="form-control" placeholder="Enter Product Name"
-                                                required name="title" value="{{ old('title') }}">
-                                            <div class="help-block with-errors"></div>
+                                            <input type="text" class="form-control" required name="title"
+                                                value="{{ old('title') }}">
+
                                         </div>
                                     </div>
 
@@ -31,6 +35,7 @@
                                             <textarea class="form-control" name="description" id="description"
                                                 placeholder="Mô Tả"> {{ old('description') }}</textarea>
                                         </div>
+
                                     </div>
 
                                     <div class="col-md-12">
@@ -43,7 +48,7 @@
                                                         <i class="fa fa-picture-o"></i> Choose
                                                     </a>
                                                 </span>
-                                                <input id="thumbnail" class="form-control" type="text" name="filepath">
+                                                <input id="thumbnail" class="form-control" type="text" name="photo">
                                             </div>
                                             <div id="holder" style="margin-top:15px;max-height:100px;"></div>
                                         </div>
@@ -107,9 +112,9 @@
         $('#lfm').filemanager('image');
     </script>
 
-<script>
-    $(document).ready(function() {
-        $('#description').summernote();
-    });
-  </script>
+    <script>
+        $(document).ready(function() {
+            $('#description').summernote();
+        });
+    </script>
 @endsection

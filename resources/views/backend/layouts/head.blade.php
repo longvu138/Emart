@@ -12,3 +12,6 @@
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
 {{-- summer note --}}
 <link rel="stylesheet" href="/template/assets/summernote/summernote.css">
+{{-- swtich button --}}
+
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
