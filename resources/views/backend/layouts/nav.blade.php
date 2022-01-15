@@ -25,6 +25,40 @@
                         <span class="ml-4">Tổng quan</span>
                     </a>
                 </li>
+
+
+                <li class=" ">
+                    <a href="#banner" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                        <svg class="svg-icon" id="p-dash1" width="20" height="20"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+                            stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path
+                                d="M4 17v5H2V3h19.138a.5.5 0 0 1 .435.748L18 10l3.573 6.252a.5.5 0 0 1-.435.748H4zM4 5v10h14.554l-2.858-5 2.858-5H4z" />
+                        </svg>
+                        <span class="ml-4">Banner</span>
+                        <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="10 15 15 20 20 15"></polyline>
+                            <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                        </svg>
+                    </a>
+                    <ul id="banner" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        <li class="">
+                            <a href="{{route('banner.index')}}">
+                                <i class="las la-minus"></i><span>Danh Sách Banner</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{{route('banner.create')}}">
+                                <i class="las la-minus"></i><span>Thêm Banner </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class=" ">
                     <a href="#product" class="collapsed" data-toggle="collapse" aria-expanded="false">
                         <svg class="svg-icon" id="p-dash2" width="20" height="20"
@@ -272,8 +306,7 @@
                                         </div>
                                         <div class="p-3">
                                             <div class="d-flex align-items-center justify-content-center mt-3">
-                                                <a href=""
-                                                    class="btn border mr-2">Profile</a>
+                                                <a href="" class="btn border mr-2">Profile</a>
                                                 <a class="btn border" href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();
                                                                          document.getElementById('logout-form').submit();">

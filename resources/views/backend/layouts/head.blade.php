@@ -10,3 +10,5 @@
 <link rel="stylesheet" href="/template/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
 <link rel="stylesheet" href="/template/assets/vendor/remixicon/fonts/remixicon.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+{{-- summer note --}}
+<link rel="stylesheet" href="/template/assets/summernote/summernote.css">

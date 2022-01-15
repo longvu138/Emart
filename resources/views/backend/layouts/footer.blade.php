@@ -30,3 +30,10 @@
 
 <!-- app JavaScript -->
 <script src="/template/assets/js/app.js"></script>
+{{-- summer note --}}
+
+<script async src="/template/assets/summernote/summernote.js"></script>
+
+
+
+@yield('scripts')

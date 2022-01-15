@@ -9,6 +9,7 @@ class AdminController extends Controller
     //
     public function admin()
     {
-        return view('backend.layouts.master',['title'=>'Trang Quản Trị']);
+        return view('backend.index',['title'=>'Trang Quản Trị']);
+
     }
 }
