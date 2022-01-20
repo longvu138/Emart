@@ -18,6 +18,7 @@ class Category extends Model
         'parent_id'
     ];
 
+    // xoá cha thay đổi trạng thái của con về 1
     public static function shiftChild($cate_id)
     {
         return Category::whereIn('id', $cate_id)->update(['is_parent'=> 1]);
