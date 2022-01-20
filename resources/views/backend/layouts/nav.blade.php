@@ -106,12 +106,12 @@
                     </a>
                     <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         <li class="">
-                            <a href="page-list-product.html">
+                            <a href="{{ route('product.index') }}">
                                 <i class="las la-minus"></i><span>Danh sách sản phẩm</span>
                             </a>
                         </li>
                         <li class="">
-                            <a href="page-add-product.html">
+                            <a href="{{ route('product.create') }}">
                                 <i class="las la-minus"></i><span>Thêm sản phẩm</span>
                             </a>
                         </li>

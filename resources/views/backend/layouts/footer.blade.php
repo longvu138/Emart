@@ -43,7 +43,7 @@
 <script>
     setTimeout(function() {
         $('#alert').slideUp();
-    }, 3000);
+    }, 2000);
 </script>
 
 <script>
