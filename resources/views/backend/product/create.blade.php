@@ -64,8 +64,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <button type="submit" class="btn btn-primary mr-2 disabled">Thêm mớI</button>
                                     <button type="reset" class="btn btn-danger">Tạo mới</button>
                             </form>
