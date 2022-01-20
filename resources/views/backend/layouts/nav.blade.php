@@ -1,6 +1,6 @@
 <div class="iq-sidebar  sidebar-default ">
     <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-        <a href="index.html" class="header-logo">
+        <a href="{{route('admin')}}" class="header-logo">
             <img src="/template/assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo">
             <h5 class="logo-title light-logo ml-3">Admin</h5>
         </a>
@@ -12,7 +12,7 @@
         <nav class="iq-sidebar-menu">
             <ul id="iq-sidebar-toggle" class="iq-menu">
                 <li class="active">
-                    <a href="index.html" class="svg-icon">
+                    <a href="{{route('admin')}}" class="svg-icon">
                         <svg class="svg-icon" id="p-dash1" width="20" height="20"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -107,12 +107,12 @@
                     </a>
                     <ul id="category" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         <li class="">
-                            <a href="page-list-category.html">
+                            <a href="{{route('category.index')}}">
                                 <i class="las la-minus"></i><span>Danh sách danh mục</span>
                             </a>
                         </li>
                         <li class="">
-                            <a href="page-add-category.html">
+                            <a href="{{route('category.create')}}">
                                 <i class="las la-minus"></i><span>Thêm danh mục</span>
                             </a>
                         </li>
@@ -254,15 +254,15 @@
         <nav class="navbar navbar-expand-lg navbar-light p-0">
             <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                 <i class="ri-menu-line wrapper-menu"></i>
-                <a href="index.html" class="header-logo">
+                <a href="{{route('admin')}}" class="header-logo">
                     <img src="/template/assets/images/logo.png" class="img-fluid rounded-normal" alt="logo">
                     <h5 class="logo-title ml-3">POSDash</h5>
 
                 </a>
             </div>
             <div class="iq-search-bar device-search">
-                <form action="index.html#" class="searchbox">
-                    <a class="search-link" href="index.html#"><i class="ri-search-line"></i></a>
+                <form action="{{route('admin')}}#" class="searchbox">
+                    <a class="search-link" href="{{route('admin')}}#"><i class="ri-search-line"></i></a>
                     <input type="text" class="text search-input" placeholder="Search here...">
                 </form>
             </div>
@@ -275,23 +275,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-list align-items-center">
                         <li class="nav-item nav-icon search-content">
-                            <a href="index.html#" class="search-toggle rounded" id="dropdownSearch"
+                            <a href="{{route('admin')}}#" class="search-toggle rounded" id="dropdownSearch"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="ri-search-line"></i>
                             </a>
                             <div class="iq-search-bar iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownSearch">
-                                <form action="index.html#" class="searchbox p-2">
+                                <form action="{{route('admin')}}#" class="searchbox p-2">
                                     <div class="form-group mb-0 position-relative">
                                         <input type="text" class="text search-input font-size-12"
                                             placeholder="type here to search...">
-                                        <a href="index.html#" class="search-link"><i
+                                        <a href="{{route('admin')}}#" class="search-link"><i
                                                 class="las la-search"></i></a>
                                     </div>
                                 </form>
                             </div>
                         </li>
                         <li class="nav-item nav-icon dropdown caption-content">
-                            <a href="index.html#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
+                            <a href="{{route('admin')}}#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="/template/assets/images/user/1.png" class="img-fluid rounded" alt="user">
                             </a>

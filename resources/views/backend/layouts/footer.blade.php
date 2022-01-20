@@ -1,4 +1,4 @@
-<footer class="iq-footer">
+<footer class="iq-footer mt-4" >
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
@@ -36,11 +36,24 @@
 
 {{-- swwithch button --}}
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-
+{{--  --}}
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 @yield('scripts')
 
 <script>
     setTimeout(function() {
         $('#alert').slideUp();
     }, 3000);
+</script>
+
+<script>
+    if ($.fn.dataTable.isDataTable('#DataTables_Table_0')) {
+        table = $('#DataTables_Table_0').DataTable();
+        table.destroy();
+    } else {
+        table = $('#example').DataTable({
+            paging: false
+        });
+    }
+
 </script>

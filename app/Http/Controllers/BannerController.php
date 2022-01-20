@@ -16,7 +16,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banners = Banner::orderBy('id', 'DESC')->get();
+        $banners = Banner::orderBy('id', 'DESC')->paginate(10);
         $index = 1;
         return view('backend.banners.index', [
             'title' => 'Danh Sách Banner'

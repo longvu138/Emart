@@ -3,3 +3,6 @@
 
 ###
 https://summernote.org/getting-started/
+
+### notification
+https://sweetalert.js.org/guides/#getting-started

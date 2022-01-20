@@ -17,5 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UserTableSeeder::class);
         // gọi đếm factory tạo 50 người dùng
         \App\Models\User::factory(50)->create();
+        \App\Models\Category::factory(50)->create();
+        \App\Models\Banner::factory(50)->create();
+
     }
 }
