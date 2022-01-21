@@ -24,6 +24,7 @@ class Product extends Model
         'cat_id',
         'child_cat_id',
         'size',
+        'brand_id'
 
     ];
 }

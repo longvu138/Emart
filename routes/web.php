@@ -24,27 +24,30 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Auth::routes(['register'=>false]);
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // admin 
-Route::group(['prefix' =>'admin/','middleware'=>'auth'], function () {
-    Route::get('/',[AdminController::class,'admin'] )->name('admin');
+Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function () {
+    Route::get('/', [AdminController::class, 'admin'])->name('admin');
 
     // Banner Section
-    Route::resource('/banner',BannerController::class);
-    Route::post('banner_status', [BannerController::class,'bannerStatus'])->name('banner.status');
+    Route::resource('/banner', BannerController::class);
+    Route::post('banner_status', [BannerController::class, 'bannerStatus'])->name('banner.status');
 
-     // categoris Section
-     Route::resource('/category',CategoryController::class);
-     Route::post('category_status', [CategoryController::class,'categoryStatus'])->name('category.status');
+    // categoris Section
+    Route::resource('/category', CategoryController::class);
+    Route::post('category_status', [CategoryController::class, 'categoryStatus'])->name('category.status');
+    Route::post('category/{id}/child',[CategoryController::class,'getChildByParentID'] );
 
-      // Brand Section
-      Route::resource('/brand',BrandController::class);
-      Route::post('brand_status', [BrandController::class,'brandStatus'])->name('brand.status');
+    // Brand Section
+    Route::resource('/brand', BrandController::class);
+    Route::post('brand_status', [BrandController::class, 'brandStatus'])->name('brand.status');
 
-      // product Section
-      Route::resource('/product',ProductController::class);
-      Route::post('product_status', [ProductController::class,'productStatus'])->name('product.status');
+    // product Section
+    Route::resource('/product', ProductController::class);
+    Route::post('product_status', [ProductController::class, 'productStatus'])->name('product.status');
+
+    // 
 });

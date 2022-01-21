@@ -43,7 +43,38 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-       
+        $this->validate($request, [
+            'title' => 'string|required',
+            'summary' => 'string|nullable',
+            'description' => 'string|nullable',
+            'stock' => 'nullable|numeric',
+            'price' => 'nullable|numeric',
+            'discount' => 'nullable|numeric',
+            'photo' => 'required',
+            'cat_id' => 'required|exists:categories,id',
+            'child_cat_id' => 'nullable|exists:categories,id',
+            'size' => 'nullable',
+            'conditions' => 'nullable',
+            'status' => 'nullable|in:active,inactive',
+            'brand_id' => 'nullable|exists:categories,id',
+
+        ]);
+        $data = $request->all();
+        $slug = Str::slug($request->input('title'));
+        $slug_count = Product::where('slug', $slug)->count();
+        if ($slug_count > 0) {
+            $slug = time() . '-' . $slug;
+        }
+        $data['slug'] = $slug;
+        // 100-100*10% = 90
+        $data['offer_price'] = (($request->price - ($request->price * $request->discount) / 100));
+        // return $data;
+        $status = Product::create($data);
+        if ($status) {
+            return redirect()->route('product.index')->with('success', 'Thêm mớI sản phẩm thành công');
+        } else {
+            return back()->with('error', 'Thêm mớI sản phẩm không thành công');
+        }
     }
 
     /**
@@ -53,8 +84,16 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $index = 1;
+        $product = Product::find($id);
+        if ($product) {
+            return view('backend.product.view', [
+                'title' => 'Xem chi tiết sản phẩm'
+            ])->with(compact('product','index'));
+        } else {
+            return back()->with('error', 'Không Tìm Thấy');
+        }
     }
 
     /**
@@ -65,6 +104,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+
        
     }
 
@@ -77,8 +117,6 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-      
     }
 
     /**

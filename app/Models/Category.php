@@ -21,6 +21,11 @@ class Category extends Model
     // xoá cha thay đổi trạng thái của con về 1
     public static function shiftChild($cate_id)
     {
-        return Category::whereIn('id', $cate_id)->update(['is_parent'=> 1]);
+        return Category::whereIn('id', $cate_id)->update(['is_parent' => 1]);
+    }
+
+    public  static function getChildByParentID($id)
+    {
+        return Category::where('parent_id', $id)->pluck('title','id');
     }
 }

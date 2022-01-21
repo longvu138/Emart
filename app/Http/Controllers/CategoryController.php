@@ -29,7 +29,8 @@ class CategoryController extends Controller
 
 
     public function store(Request $request)
-    {
+    {   
+      
         $data = $request->validate(
             [
                 'title' => 'string|required',
@@ -149,7 +150,7 @@ class CategoryController extends Controller
         if ($category) {
             $status = $category->delete();
             if ($status) {
-                if (count($child_cate_id)>0) {
+                if (count($child_cate_id) > 0) {
                     Category::shiftChild($child_cate_id);
                 }
                 return redirect()->route('category.index')->with('success', 'Bạn đã xoá thành công');
@@ -167,5 +168,21 @@ class CategoryController extends Controller
             DB::table('categories')->where('id', $request->id)->update(['status' => 'inactive']);
         }
         return response()->json(['msg' => 'Cập nhật status thành công', 'status' => true]);
+    }
+
+    public function getChildByParentID(Request $request, $id)
+    {
+        $category = Category::find($request->id);
+        $child_id = Category::getChildByParentID($id);
+        if ($category) {
+            if (count($child_id) <= 0) {
+                return  response()->json(['status' => false, 'data' => null, 'msg' => '']);
+            }
+            return  response()->json(['status' => true, 'data' => $child_id, 'msg' => '']);
+        }
+        else {
+            return  response()->json(['status' => false, 'data' => null, 'msg' => 'category not found']);
+
+        }
     }
 }
