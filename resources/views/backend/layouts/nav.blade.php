@@ -224,35 +224,17 @@
                     </a>
                     <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         <li class="">
-                            <a href="page-list-customers.html">
-                                <i class="las la-minus"></i><span>Khách hàng</span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="page-add-customers.html">
-                                <i class="las la-minus"></i><span>Thêm khách hàng</span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="page-list-users.html">
+                            <a href="{{ route('user.index') }}">
                                 <i class="las la-minus"></i><span>Người dùng</span>
                             </a>
                         </li>
+
                         <li class="">
-                            <a href="page-add-users.html">
+                            <a href="{{ route('user.create') }}">
                                 <i class="las la-minus"></i><span>Thêm người dùng</span>
                             </a>
                         </li>
-                        <li class="">
-                            <a href="page-list-suppliers.html">
-                                <i class="las la-minus"></i><span>Nhà cung cấp</span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="page-add-supplier.html">
-                                <i class="las la-minus"></i><span>Thêm nhà cung cấp</span>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
                 <li class="">

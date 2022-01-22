@@ -6,6 +6,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -49,5 +50,7 @@ Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function () {
     Route::resource('/product', ProductController::class);
     Route::post('product_status', [ProductController::class, 'productStatus'])->name('product.status');
 
-    // 
+    // user Section
+    Route::resource('/user', UserController::class);
+    Route::post('user_status', [UserController::class, 'userStatus'])->name('user.status');
 });
