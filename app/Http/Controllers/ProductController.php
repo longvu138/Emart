@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('id', 'DESC')->paginate(20);
+        $products = Product::orderBy('id', 'DESC')->paginate(10);
         $index = 1;
         return view('backend.product.index', [
             'title' => 'Danh Sách Sản Phẩm'
@@ -84,16 +84,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
-        $index = 1;
-        $product = Product::find($id);
-        if ($product) {
-            return view('backend.product.view', [
-                'title' => 'Xem chi tiết sản phẩm'
-            ])->with(compact('product','index'));
-        } else {
-            return back()->with('error', 'Không Tìm Thấy');
-        }
+    {
     }
 
     /**
@@ -104,8 +95,15 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-
-       
+        $product = Product::find($id);
+        // dd($product->toArray());
+        if ($product) {
+            return view('backend.product.update', [
+                'title' => 'Cập nhật sản phẩm'
+            ])->with(compact('product'));
+        } else {
+            return back()->with('error', 'Không Tìm Thấy');
+        }
     }
 
     /**
@@ -117,6 +115,50 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
+        $product = Product::find($id);
+        if ($product) {
+            $this->validate(
+                $request,
+                [
+                    'title' => 'string|required',
+                    'summary' => 'string|nullable',
+                    'description' => 'string|nullable',
+                    'stock' => 'nullable|numeric',
+                    'price' => 'nullable|numeric',
+                    'discount' => 'nullable|numeric',
+                    'photo' => 'required',
+                    'cat_id' => 'required|exists:categories,id',
+                    'child_cat_id' => 'nullable|exists:categories,id',
+                    'size' => 'nullable',
+                    'conditions' => 'nullable',
+                    'status' => 'nullable|in:active,inactive',
+                    'brand_id' => 'nullable|exists:categories,id',
+
+                ],
+                [
+                    'status.required' => 'Bạn chưa chọn status'
+                ]
+            );
+            $data = $request->all();
+            $slug = Str::slug($request->input('title'));
+            $slug_count = Product::where('slug', $slug)->count();
+            if ($slug_count > 0) {
+                $slug = time() . '-' . $slug;
+            }
+            $data['slug'] = $slug;
+            $data['offer_price'] = (($request->price - ($request->price * $request->discount) / 100));
+            // return $data;
+            $status = $product->fill($data)->save();
+            if ($status) {
+                return redirect()->route('product.index')->with('success', 'Cập nhật sản phẩm thành công');
+            } else {
+                return back()->with('error', 'Cập nhật sản phẩm không thành công');
+            }
+        } else {
+            return back()->with('error', 'Không Tìm Thấy');
+        }
     }
 
     /**

@@ -31,7 +31,7 @@
                                         <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0"
                                             rowspan="1" colspan="1" aria-sort="ascending"
                                             aria-label="
-                                                                                                                                                                                               : activate to sort column descending"
+                                                                                                                                                                                                                   : activate to sort column descending"
                                             style="width: 63.4125px;">
                                             <div class="checkbox d-inline-block">
 
@@ -72,9 +72,12 @@
                                                 </div>
                                             </td>
                                             <td>
+                                                @php
+                                                    $photo = explode(',', $product->photo);
+                                                @endphp
                                                 <div class="d-flex align-items-center">
-                                                    <img src="{{ $product->photo }}"
-                                                        class="img-fluid rounded avatar-50 mr-3" alt="image">
+                                                    <img src="{{ $photo[0] }}" class="img-fluid rounded avatar-50 mr-3"
+                                                        alt="image">
                                                     <div>
                                                         {{ $product->title }}
 
@@ -157,7 +160,8 @@
 
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title font-weight-bold text-uppercase" id="exampleModalLongTitle">
+                                                            <h5 class="modal-title font-weight-bold text-uppercase"
+                                                                id="exampleModalLongTitle">
                                                                 {{ $product->title }}</h5>
                                                             <button type="button" class="close"
                                                                 data-dismiss="modal" aria-label="Close">
@@ -165,71 +169,73 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <strong>Summary</strong>
+                                                            <strong>Tóm Tắt</strong>
                                                             <p> {!! html_entity_decode($product->summary) !!} </p>
 
-                                                            <strong>Description</strong>
+                                                            <strong>Mô Tả</strong>
                                                             <p> {!! html_entity_decode($product->description) !!} </p>
 
                                                             <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <strong>Price</strong>
+                                                                <div class="col-md-4">
+                                                                    <strong>Giá Tiền</strong>
                                                                     <p> {{ number_format($product->price, 2) }}</p>
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <strong> Offer Price </strong>
-                                                                    <p> {{ $product->offer_price }}%</p>
+                                                                <div class="col-md-4">
+                                                                    <strong> Giá Đã Giảm </strong>
+                                                                    <p> {{ $product->offer_price }}</p>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <strong> Stock </strong>
+                                                                    <p> {{ $product->stock }}</p>
                                                                 </div>
                                                             </div>
-
+                                                            <hr>
 
                                                             <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <strong>Catogory</strong>
+                                                                <div class="col-md-4">
+                                                                    <strong> Danh Mục</strong>
                                                                     <p> {{ \App\Models\Category::where('id', $product->cat_id)->value('title') }}
                                                                     </p>
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <strong>Child Catogory</strong>
+                                                                <div class="col-md-4">
+                                                                    <strong>Danh Mục Con</strong>
                                                                     <p> {{ \App\Models\Category::where('id', $product->child_cat_id)->value('title') }}
                                                                     </p>
                                                                 </div>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-4">
                                                                     <strong>Brand</strong>
                                                                     <p> {{ \App\Models\Brand::where('id', $product->brand_id)->value('title') }}
                                                                     </p>
                                                                 </div>
-                                                                <div class="col-md-6">
+                                                            </div>
+                                                            <hr>
+
+
+                                                            <div class="row">
+
+                                                                <div class="col-md-4">
                                                                     <strong>Size</strong>
                                                                     <p class="badge badge-success"> {{ $product->size }}
                                                                     </p>
                                                                 </div>
-                                                            </div>
 
-                                                            <div class="row">
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-4">
                                                                     <strong>Conditions</strong>
-                                                                    <p class="badge badge-primary"> {{ $product->conditions }}
+                                                                    <p class="badge badge-primary">
+                                                                        {{ $product->conditions }}
                                                                     </p>
                                                                 </div>
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-4">
                                                                     <strong>Status</strong>
-                                                                    <p class="badge badge-warning"> {{ $product->status }}
+                                                                    <p class="badge badge-warning">
+                                                                        {{ $product->status }}
                                                                     </p>
                                                                 </div>
                                                             </div>
-
-
-
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save
-                                                                changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
