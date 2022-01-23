@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\Brand;
@@ -24,11 +25,14 @@ use Illuminate\Support\Facades\Route;
 
 
 
+// Route Frontend
+Route::get('/',[IndexController::class,'home'])->name('home');
 
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Route Backend
 // admin 
 Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function () {
     Route::get('/', [AdminController::class, 'admin'])->name('admin');
