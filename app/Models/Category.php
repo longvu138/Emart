@@ -28,4 +28,10 @@ class Category extends Model
     {
         return Category::where('parent_id', $id)->pluck('title','id');
     }
+
+    public function products()
+    {   
+        //  relationship category 1 - n product 
+        return $this->hasMany('App\Models\Product','cat_id','id');
+    }
 }

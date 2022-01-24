@@ -19,7 +19,7 @@
                                             <!-- Hero-btn -->
                                             <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s"
                                                 data-duration="2000ms">
-                                                <a href="industries.html" class="btn hero-btn">Shop Now</a>
+                                                <a href="{{ $banner->slug }}" class="btn hero-btn">Shop Now</a>
                                             </div>
                                         </div>
                                     </div>
@@ -37,7 +37,7 @@
 
             </div>
         </div>
-        <!-- slider Area End-->
+
         <!-- ? New Product Start -->
         <section class="new-product-area section-padding30">
             <div class="container">
@@ -50,39 +50,24 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-new-pro mb-30 text-center">
-                            <div class="product-img">
-                                <img src="/template/frontend/img/gallery/new_product1.png" alt="">
+                    @if (count($categories) > 0)
+                        @foreach ($categories as $category)
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-new-pro mb-30 text-center">
+                                    <div class="product-img">
+                                        <a href="{{ route('product.category', $category->slug) }}"> <img
+                                                src="{{ $category->photo }}" alt=""> </a>
+                                    </div>
+                                    <div class="product-caption">
+                                        <h3><a href="{{ route('product.category', $category->slug) }}">{{ $category->title }}</a>
+                                        </h3>
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="product-caption">
-                                <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                <span>$ 45,743</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-new-pro mb-30 text-center">
-                            <div class="product-img">
-                                <img src="/template/frontend/img/gallery/new_product2.png" alt="">
-                            </div>
-                            <div class="product-caption">
-                                <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                <span>$ 45,743</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-new-pro mb-30 text-center">
-                            <div class="product-img">
-                                <img src="/template/frontend/img/gallery/new_product3.png" alt="">
-                            </div>
-                            <div class="product-caption">
-                                <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                <span>$ 45,743</span>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+
+                    @endif
                 </div>
             </div>
         </section>

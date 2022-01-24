@@ -27,4 +27,10 @@ class Product extends Model
         'brand_id'
 
     ];
+
+    //     rela 1 brand- n product
+    public function brand()
+    {
+        return $this->belongsTo('App\Models\Brand');
+    }
 }

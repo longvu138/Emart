@@ -28,6 +28,10 @@ use Illuminate\Support\Facades\Route;
 // Route Frontend
 Route::get('/',[IndexController::class,'home'])->name('home');
 
+// Product-cat
+
+Route::get('product-cat/{slug}', [IndexController::class,'productCategory'])->name('product.category');
+
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
