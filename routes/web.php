@@ -29,8 +29,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[IndexController::class,'home'])->name('home');
 
 // Product-cat
-
 Route::get('product-cat/{slug}', [IndexController::class,'productCategory'])->name('product.category');
+
+// Product-detail 
+
+Route::get('product-detail/{slug}',[IndexController::class,'productDetail'])->name('product.detail');
 
 Auth::routes(['register' => false]);
 

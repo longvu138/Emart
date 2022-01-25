@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="section-tittle mb-70">
-                            <h2>New Arrivals</h2>
+                            <h2>Danh Mục</h2>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,8 @@
                                                 src="{{ $category->photo }}" alt=""> </a>
                                     </div>
                                     <div class="product-caption">
-                                        <h3><a href="{{ route('product.category', $category->slug) }}">{{ $category->title }}</a>
+                                        <h3><a
+                                                href="{{ route('product.category', $category->slug) }}">{{ $category->title }}</a>
                                         </h3>
 
                                     </div>
@@ -71,41 +72,55 @@
                 </div>
             </div>
         </section>
-        <!--  New Product End -->
-        <!--? Gallery Area Start -->
-        <div class="gallery-area">
-            <div class="container-fluid p-0 fix">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-gallery mb-30">
-                            <div class="gallery-img big-img"
-                                style="background-image: url(/template/frontend/img/gallery/gallery1.png);"></div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-gallery mb-30">
-                            <div class="gallery-img big-img"
-                                style="background-image: url(/template/frontend/img/gallery/gallery2.png);"></div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-12">
-                        <div class="row">
-                            <div class="col-xl-12 col-lg-12 col-md-6 col-sm-6">
-                                <div class="single-gallery mb-30">
-                                    <div class="gallery-img small-img"
-                                        style="background-image: url(/template/frontend/img/gallery/gallery3.png);"></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-12 col-lg-12  col-md-6 col-sm-6">
-                                <div class="single-gallery mb-30">
-                                    <div class="gallery-img small-img"
-                                        style="background-image: url(/template/frontend/img/gallery/gallery4.png);"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
+
+
+        <!--? Gallery Area Start -->
+        <div class="container">
+            <div class="col-xl-12">
+                <div class="section-tittle mb-70">
+                    <h2>New Arrivals</h2>
                 </div>
+            </div>
+        </div>
+        @php
+            $newProducts = \App\Models\Product::where(['status' => 'active', 'conditions' => 'new'])
+                ->orderBy('id', 'DESC')
+                ->limit(3)
+                ->get();
+        @endphp
+        <div class="container">
+            <div class="row">
+                @foreach ($newProducts as $product)
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-new-pro mb-30 text-center">
+                            <div class="product-img">
+                                @php
+                                    $photo = explode(',', $product->photo);
+                                @endphp
+                                <img src="{{ $photo[0] }}" alt="">
+                            </div>
+                            <div class="popular-caption">
+                                <h3 class="text-danger">
+                                    {{ \App\Models\Brand::where('id', $product->brand_id)->value('title') }}
+                                </h3>
+                                <h3><a class="text-danger" href="{{ route('product.detail',$product->slug) }}">{{ $product->title }}</a>
+                                </h3>
+                                @if ($product->offer_price)
+                                    <span> {{ number_format($product->offer_price, 2) }} VNĐ
+                                        <small>
+                                            <del class="text-danger">
+                                                {{ number_format($product->price, 2) }} VNĐ
+                                            </del>
+                                        </small>
+                                    </span>
+                                @else
+                                    <span> {{ number_format($product->price, 2) }} VNĐ </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
         <!-- Gallery Area End -->

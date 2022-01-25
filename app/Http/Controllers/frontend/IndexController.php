@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -21,10 +22,21 @@ class IndexController extends Controller
 
     // 
     public function productCategory($slug)
-    {   
+    {
         //  get category with product where slug == $slug 
         $categories = Category::with('products')->where('slug', $slug)->first();
         // return $categories->products;
         return view('frontend.pages.product-category')->with(compact('categories'));
+    }
+
+    public function productDetail($slug)
+    {
+
+        $product = Product::where('slug', $slug)->first();
+        if ($product) {
+            return view('frontend.pages.product-detail')->with(compact('product'));
+        } else {
+            return 'Product detail not found';
+        }
     }
 }
