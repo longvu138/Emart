@@ -29,14 +29,26 @@ class IndexController extends Controller
         return view('frontend.pages.product-category')->with(compact('categories'));
     }
 
+
+    // 
     public function productDetail($slug)
     {
 
-        $product = Product::where('slug', $slug)->first();
+        $product = Product::with('rel_prods')->where('slug', $slug)->first();
+      
         if ($product) {
             return view('frontend.pages.product-detail')->with(compact('product'));
         } else {
             return 'Product detail not found';
         }
     }
+
+    // 
+    public function userAuth()
+    {
+        return view('frontend.auth.auth');
+    }
+
+
+
 }

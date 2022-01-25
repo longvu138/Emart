@@ -14,7 +14,7 @@
                             @endphp
                             @foreach ($photos as $key => $photo)
                                 <div class="single_product_img">
-                                    <img src="{{$photo}}"  alt=" #" class="img-fluid">
+                                    <img src="{{ $photo }}" alt=" #" class="img-fluid">
                                 </div>
                             @endforeach
 
@@ -60,6 +60,55 @@
                 </div>
             </div>
         </div>
+
+        <!--? Gallery Area Start -->
+        <div class="container">
+            <div class="col-xl-12">
+                <div class="section-tittle mb-70">
+                    <h2>San Pham Lien Quan</h2>
+                </div>
+            </div>
+        </div>
+      
+        <div class="container">
+            <div class="row">
+               @if (count($product->rel_prods)>0)
+                @foreach ($product->rel_prods as $item)
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                    <div class="single-new-pro mb-30 text-center">
+                        <div class="product-img">
+                            @php
+                                $photo = explode(',', $item->photo);
+                            @endphp
+                            <img src="{{ $photo[0] }}" alt="{{$item->title}}">
+                        </div>
+                        <div class="popular-caption">
+                            <h3 class="text-danger">
+                                {{ \App\Models\Brand::where('id', $item->brand_id)->value('title') }}
+                            </h3>
+                            <h3><a class="text-danger"
+                                    href="{{ route('product.detail', $item->slug) }}">{{ $item->title }}</a>
+                            </h3>
+                            @if ($item->offer_price)
+                                <span> {{ number_format($item->offer_price, 2) }} VNĐ
+                                    <small>
+                                        <del class="text-danger">
+                                            {{ number_format($item->price, 2) }} VNĐ
+                                        </del>
+                                    </small>
+                                </span>
+                            @else
+                                <span> {{ number_format($item->price, 2) }} VNĐ </span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+               @endif
+                  
+            </div>
+        </div>
+        <!-- Gallery Area End -->
         <!--================End Single Product Area =================-->
         <!-- subscribe part here -->
         <section class="subscribe_part section_padding">
@@ -81,4 +130,7 @@
         </section>
         <!-- subscribe part end -->
     </main>
+
+
+
 @endsection

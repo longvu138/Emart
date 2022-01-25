@@ -26,14 +26,21 @@ use Illuminate\Support\Facades\Route;
 
 
 // Route Frontend
-Route::get('/',[IndexController::class,'home'])->name('home');
+Route::get('/', [IndexController::class, 'home'])->name('home');
 
 // Product-cat
-Route::get('product-cat/{slug}', [IndexController::class,'productCategory'])->name('product.category');
+Route::get('product-cat/{slug}', [IndexController::class, 'productCategory'])->name('product.category');
 
 // Product-detail 
+Route::get('product-detail/{slug}', [IndexController::class, 'productDetail'])->name('product.detail');
 
-Route::get('product-detail/{slug}',[IndexController::class,'productDetail'])->name('product.detail');
+// user.auth
+Route::get('users/auth', [IndexController::class, 'userAuth'])->name('user.auth');
+
+
+
+
+
 
 Auth::routes(['register' => false]);
 
@@ -51,7 +58,7 @@ Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function () {
     // categoris Section
     Route::resource('/category', CategoryController::class);
     Route::post('category_status', [CategoryController::class, 'categoryStatus'])->name('category.status');
-    Route::post('category/{id}/child',[CategoryController::class,'getChildByParentID'] );
+    Route::post('category/{id}/child', [CategoryController::class, 'getChildByParentID']);
 
     // Brand Section
     Route::resource('/brand', BrandController::class);

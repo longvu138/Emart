@@ -33,4 +33,10 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Brand');
     }
+
+        // get product co cat_id = cat product click
+    public function rel_prods()
+    {
+        return $this->hasMany('App\Models\Product','cat_id','cat_id')->where('status','active')->limit(4);
+    }
 }
