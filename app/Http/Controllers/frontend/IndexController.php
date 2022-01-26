@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller
 {
@@ -35,7 +39,7 @@ class IndexController extends Controller
     {
 
         $product = Product::with('rel_prods')->where('slug', $slug)->first();
-      
+
         if ($product) {
             return view('frontend.pages.product-detail')->with(compact('product'));
         } else {
@@ -49,6 +53,65 @@ class IndexController extends Controller
         return view('frontend.auth.auth');
     }
 
+    public function loginSubmit(Request $request)
+    {
 
 
+        $this->validate($request, [
+            'email' => 'email|required|exists:users,email',
+            'password' => 'required|min:4',
+        ]);
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 'active'])) {
+            Session::put('user', $request->email);
+            // url.intended trở lại trang đích sau khi đăng nhập
+            if (Session::get('url.intended')) {
+                return Redirect::to(Session::get('url.intended'));
+            } else {
+                return redirect()->route('home')->with('success', 'login thành công');
+            }
+        } else {
+            return back()->with('error', 'Tài khoản không chính xác');
+        }
+    }
+
+
+    public function registerSubmit(Request $request)
+    {
+
+       
+        $this->validate($request, [
+            'full_name' => 'required',
+            'username' => 'required',
+            'email' => 'email|required|exists:users,email',
+            'password' => 'required|min:4|confirmed',
+        ]);
+        $data = $request->all();
+        dd($data);
+        $check =  $this->createUser($data);
+        Session::put('user', $data['email']);
+        Auth::login($check);
+        if ($check) {
+            return redirect()->route('home')->with('success', 'dang ky thanh cong');
+        } else {
+            return back()->with('error', 'dang ky that bai');;
+        }
+    }
+
+    private function createUser(array $data)
+    {
+        return User::create([
+            'full_name' => $data['full_name'],
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => $data['password']
+        ]);
+    }
+
+    public function userLogout()
+    {
+        Session::forget('user');
+        Auth::logout();
+        return redirect('/');
+    }
 }

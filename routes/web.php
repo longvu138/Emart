@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
 // Route Frontend
 Route::get('/', [IndexController::class, 'home'])->name('home');
 
@@ -36,6 +37,9 @@ Route::get('product-detail/{slug}', [IndexController::class, 'productDetail'])->
 
 // user.auth
 Route::get('users/auth', [IndexController::class, 'userAuth'])->name('user.auth');
+Route::post('user/login', [IndexController::class, 'loginSubmit'])->name('login.submit');
+Route::post('user/register', [IndexController::class, 'registerSubmit'])->name('register.submit');
+Route::get('user/logout',  [IndexController::class, 'userLogout'])->name('user.logout');
 
 
 
@@ -48,7 +52,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Route Backend
 // admin 
-Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin/', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', [AdminController::class, 'admin'])->name('admin');
 
     // Banner Section
@@ -71,4 +75,13 @@ Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function () {
     // user Section
     Route::resource('/user', UserController::class);
     Route::post('user_status', [UserController::class, 'userStatus'])->name('user.status');
+});
+
+
+// seller 
+Route::group(['prefix' => 'seller/', 'middleware' => ['auth', 'seller']], function () {
+    // Route::get('/', [AdminController::class, 'admin'])->name('seller');
+    Route::get('/', function () {
+        return 'view seller nè';
+    })->name('seller');
 });

@@ -1,5 +1,5 @@
  <!--? Preloader Start -->
- <div id="preloader-active">
+ {{-- <div id="preloader-active">
      <div class="preloader d-flex align-items-center justify-content-center">
          <div class="preloader-inner position-relative">
              <div class="preloader-circle"></div>
@@ -8,7 +8,7 @@
              </div>
          </div>
      </div>
- </div>
+ </div> --}}
  <!-- Preloader Start -->
  <header>
      <!-- Header Start -->
@@ -55,18 +55,18 @@
                      <!-- Header Right -->
                      <div class="header-right">
                          <ul>
-                             <li>
-                                 <div class="nav-search search-switch">
-                                     <span class="flaticon-search"></span>
-                                 </div>
-                             </li>
                              @auth()
-                                 <li> <span class="flaticon-user">Hello</span></li>
+                                 <li class="pr-3"> <i class="fas fa-user"></i>
+                                     {{ auth()->user()->full_name }}</span></li>
+                                 <li class="pr-3"> <a class="text-danger"
+                                         href="{{ route('user.logout') }}"><i class="fas fa-sign-out-alt"></i></span>
+                                     </a></span></li>
 
                              @else
-                                 <li> <a href="{{ route('user.auth') }}"><span class="flaticon-user"> Login</span></a></li>
+                                 <li> <a href="{{ route('user.auth') }}"><span class="flaticon-user"> Login</span></a>
+                                 </li>
                              @endauth
-                             <li><a href="cart.html"><span class="flaticon-shopping-cart"></span></a> </li>
+                             <li><a class="text-danger" href="cart.html"><i class="fas fa-cart-plus"></i></a> </li>
                          </ul>
                      </div>
                  </div>
