@@ -17,3 +17,4 @@
 <link rel="stylesheet" href="{{ asset('template/frontend/css/slick.css') }}">
 <link rel="stylesheet" href="{{ asset('template/frontend/css/nice-select.css') }}">
 <link rel="stylesheet" href="{{ asset('template/frontend/css/style.css') }}">
+@yield('styles')

@@ -30,3 +30,5 @@
 <!-- Jquery Plugins, main Jquery -->
 <script src="/template/frontend/js/plugins.js"></script>
 <script src="/template/frontend/js/main.js"></script>
+
+@yield('script')

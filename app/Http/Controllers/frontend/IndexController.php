@@ -25,12 +25,40 @@ class IndexController extends Controller
 
 
     // 
-    public function productCategory($slug)
+    public function productCategory(Request $request, $slug)
     {
         //  get category with product where slug == $slug 
+
         $categories = Category::with('products')->where('slug', $slug)->first();
-        // return $categories->products;
-        return view('frontend.pages.product-category')->with(compact('categories'));
+        $sort = '';
+        if ($request->sort != null) {
+            $sort = $request->sort;
+        }
+        if ($categories == null) {
+            return view('errors.404');
+        } else {
+
+            if ($sort == 'priceAsc') {
+                $products = Product::where(['status' => 'active', 'cat_id' => $categories->id])->orderBy('price', 'ASC')->paginate(6);
+                    
+            } elseif ($sort == 'priceDesc') {
+                $products = Product::where(['status' => 'active', 'cat_id' => $categories->id])->orderBy('price', 'DESC')->paginate(6);
+            } elseif ($sort == 'titleAsc') {
+                $products = Product::where(['status' => 'active', 'cat_id' => $categories->id])->orderBy('title', 'ASC')->paginate(6);
+            } elseif ($sort == 'titleDesc') {
+                $products = Product::where(['status' => 'active', 'cat_id' => $categories->id])->orderBy('title', 'DESC')->paginate(6);
+            } else {
+                $products = Product::where(['status' => 'active', 'cat_id' => $categories->id])->paginate(6);
+            }
+        }
+        $route = 'product-cat';
+
+
+        if ($request->ajax()) {
+            $view   = view('frontend.layouts._single-product', compact('products'))->render();
+            return response()->json(['html' => $view]);
+        }
+        return view('frontend.pages.product-category')->with(compact('products', 'categories', 'route'));
     }
 
 
@@ -79,7 +107,7 @@ class IndexController extends Controller
     public function registerSubmit(Request $request)
     {
 
-       
+
         $this->validate($request, [
             'full_name' => 'required',
             'username' => 'required',

@@ -63,10 +63,10 @@
                                      </a></span></li>
 
                              @else
-                                 <li> <a href="{{ route('user.auth') }}"><span class="flaticon-user"> Login</span></a>
+                                 <li> <a class="mr-3" style="color: black" href="{{ route('user.auth') }}"><i class="fas fa-user"></i> Login</a>
                                  </li>
                              @endauth
-                             <li><a class="text-danger" href="cart.html"><i class="fas fa-cart-plus"></i></a> </li>
+                             
                          </ul>
                      </div>
                  </div>
